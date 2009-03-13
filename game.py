@@ -11,6 +11,6 @@ class Game (object):
         self.gameobjects = []
     
     def run(self):
-        print "blah"
+        self.screen.update()
 
 
