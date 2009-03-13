@@ -13,10 +13,16 @@ class Screen (object):
         
     def update(self):
         """Renders all elements and refreshes the display"""
-        #TODO: render each object
+        for obj in self.gameobjects:
+            self.surface.blit(obj.surface, obj.position)
+            
         #TODO: Eventually this should be replaced with
         #      The use of smart rect updating.
         display.flip()
         
+    def add_object(self, gameobject):
+        """Does exactly what it sounds like: adds a gameobject to this
+        gamescreen"""
+        self.gameobjects.append(gameobject)
 
 

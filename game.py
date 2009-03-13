@@ -1,5 +1,6 @@
 
 from screen import Screen
+from gameobject import GameObject
 
 class Game (object):
 
@@ -11,6 +12,10 @@ class Game (object):
         self.gameobjects = []
     
     def run(self):
+        self.screen.add_object(GameObject( (10,10),(50,50) ) )
         self.screen.update()
+        #wait
+        while True:
+            pass
 
 
