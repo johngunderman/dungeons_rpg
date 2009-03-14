@@ -1,4 +1,5 @@
 
+import pygame
 from pygame import display
 
 class Screen (object):
@@ -8,6 +9,7 @@ class Screen (object):
         a screen on which all objects are displayed."""
         self.dimensions = dimensions
         display.init()
+        display.set_caption("Dungeon-RPG")
         self.surface = display.set_mode(dimensions)
         self.gameobjects = []
         
@@ -24,5 +26,8 @@ class Screen (object):
         """Does exactly what it sounds like: adds a gameobject to this
         gamescreen"""
         self.gameobjects.append(gameobject)
-
+        
+    def kill(self):
+        """Close the screen."""
+        display.quit()
 
