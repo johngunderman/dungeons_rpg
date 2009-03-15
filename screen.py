@@ -11,10 +11,13 @@ class Screen (object):
         display.init()
         display.set_caption("Dungeon-RPG")
         self.surface = display.set_mode(dimensions)
+        self.background = self.surface.copy()
         self.gameobjects = []
         
     def update(self):
         """Renders all elements and refreshes the display"""
+        #clear the screen:
+        self.surface.blit(self.background, (0,0))
         for obj in self.gameobjects:
             self.surface.blit(obj.surface, obj.position)
             

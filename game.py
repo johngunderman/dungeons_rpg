@@ -19,8 +19,8 @@ class Game (object):
         """The main game loop. Handles events"""
         self.screen.add_object( GameObject( (10,10),(50,50) ) )
         self.screen.add_object( self.player )
-        self.screen.update()
         while True:
+            self.screen.update()
             for event in pygame.event.get():
                 if event.type == QUIT:
                     self.screen.kill()

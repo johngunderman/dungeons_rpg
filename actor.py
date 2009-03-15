@@ -4,7 +4,7 @@ from gameobject import GameObject
 class Actor (GameObject):
 
     def __init__(self, dimensions, position, screen=None):
-        super(Actor, self).__init__(self, dimensions, position, screen)
+        super(Actor, self).__init__(dimensions, position, screen)
         
     def move_left(self):
         self.move((self.position[0] - 1,self.position[1]))
