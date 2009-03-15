@@ -41,11 +41,10 @@ class Screen (object):
     def check_collisions(self, gameobject):
         """Checks collisions on this screen.
         returns gameobject collided with. None if no collision."""
-        if self.in_bounds(gameobject):
-            for obj in self.gameobjects:
-                if obj.collides_with(gameobject):
-                    return obj
-            return None
+        for obj in self.gameobjects:
+            if obj.collides_with(gameobject):
+                return obj
+        return None
             
             
     def in_bounds(self, obj):
@@ -55,8 +54,6 @@ class Screen (object):
         return (obj.position[0] >= 0 
             and obj.position[1] >= 0 
             #now check from bottom-right
-            and obj.position[0] <= self.dimensions[0]
-            and obj.position[1] <= self.dimensions[1]
             #make sure that the body does not extend out of bounds either.
             and obj.dimensions[0] + obj.position[0] <= self.dimensions[0]
             and obj.dimensions[1] + obj.position[1] <= self.dimensions[1] 

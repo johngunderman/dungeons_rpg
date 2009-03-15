@@ -21,23 +21,34 @@ class GameObject (object):
 
     def move(self, position):
         """Takes a position in (x,y) form and updates this object's position"""
-        if not self.check_collisions():
-            self.position = position
+        self.__backup_pos = self.position
+        self.position = position
+        if self.check_collisions():
+            self.position = self.__backup_pos    
         
     def check_collisions(self):
         """Check collisions between this object and all other objects in
         self.screen. This method is a wrapper for 
         self.screen.check_collisions()
         returns bool: True if collided, False if not"""
-        return self.screen.check_collisions(self)
+        if not self.screen.in_bounds(self):
+            return True
+            
+        obj = self.screen.check_collisions(self)
+        print obj
+        if obj is None: #no collision
+            return False
+        else:
+            #handle collision
+            return True
+        
         
     def collides_with(self, obj):
         """Checks whether or not this object collides with obj.
         True if collision, False if not."""
         return (not obj.position[0] >= self.position[0] #first check point collision from upper-left
             and not obj.position[1] >= self.position[1]
-            and not obj.position[0] <= self.dimensions[0] + self.position[0] #now check from bottom-right
-            and not obj.position[1] <= self.dimensions[1] + self.position[1]
+            #now check from bottom-right
             #make sure that the body does not collide either.
             and not obj.dimensions[0] + obj.position[0] <= self.dimensions[0] + self.position[0]
             and not obj.dimensions[1] + obj.position[1] <= self.dimensions[1] + self.position[1]
