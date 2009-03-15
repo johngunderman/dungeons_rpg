@@ -13,12 +13,14 @@ class Game (object):
         game objects."""
         self.screen = Screen((800,600))
         self.gameobjects = []
-        self.player = Player( (50,50),(50,50) )
+        self.player = Player( (50,50),(50,50), self.screen )
     
     def run(self):
         """The main game loop. Handles events"""
         self.screen.add_object( GameObject( (10,10),(50,50) ) )
         self.screen.add_object( self.player )
+        #allow keys to be held down
+        pygame.key.set_repeat(5,1) #milis delay, repeat
         while True:
             self.screen.update()
             for event in pygame.event.get():
