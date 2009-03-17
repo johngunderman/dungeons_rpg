@@ -42,8 +42,9 @@ class Screen (object):
         """Checks collisions on this screen.
         returns gameobject collided with. None if no collision."""
         for obj in self.gameobjects:
-            if obj.collides_with(gameobject):
-                return obj
+            if obj is not gameobject:
+                if obj.collides_with(gameobject):
+                    return obj
         return None
             
             
