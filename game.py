@@ -4,6 +4,7 @@ from gameobject import GameObject
 import pygame
 from pygame.locals import *
 from player import Player
+from menu import Menu
 
 class Game (object):
 
@@ -21,6 +22,7 @@ class Game (object):
         self.screen.add_object( self.player )
         #allow keys to be held down
         pygame.key.set_repeat(5,1) #milis delay, repeat
+        self.game_menu()
         while True:
             self.screen.update()
             for event in pygame.event.get():
@@ -46,4 +48,10 @@ class Game (object):
         """Quit the game."""
         exit()
 
+    def game_menu(self):
+        main_menu = Menu((200,200),"Main Menu", {"Quit": quit}, self.screen) 
+        self.screen.surface.blit(main_menu.render(), main_menu.position )
+
+        while True:
+            pygame.display.flip()
 

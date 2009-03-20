@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-
+from menu_item import MenuItem
 
 class Menu (object):
 
@@ -11,14 +11,54 @@ class Menu (object):
         self.menu_items = menu_items
         self.screen = screen
         
+        #the vertical pixels between menu items:
+        self.separator = 5
+        
         pygame.font.init()
         
         self.items = []
         
         #change None to a font if we want a specific font in the future
         self.font = pygame.font.Font( None, 22)
-        for title, function in self.menu_items:
-             self.items.append( MenuItem(title, function, self.font) )
+        #make our menu items
+        for item in self.menu_items:
+             self.items.append( MenuItem(item, self.menu_items[item], self.font) )
+        
+        #make our title
+        self.title_dimensions = self.font.size(self.title)
+        self.title_surface = self.font.render(self.title, True, (255,255,255) )
+        
+        #the currently selected menu item
+        self.selected = 0
+        
+        #figure out our total width and height:
+        self.height = 0
+        self.width = 0
+        for item in self.items:
+            self.height += item.dimensions[0]
+            if self.height < item.dimensions[1]:
+                self.height = item.dimensions[1]
+                
+        #make sure to add in our separator:
+        self.height += len(self.items) * self.separator
         
         
         
+    def render(self):
+        #our vertical pixel location
+        x = 0
+        #horizontal displacement
+        y = 5
+        
+        s = pygame.Surface( (self.width, self.height) )
+        s.fill( 255 )
+        
+        s.blit(self.title_surface, (x,y))
+        x += self.title_surface.get_size()[0]
+        
+        for item in self.items:
+            s.blit(item.render(), (x,y))
+            x += item.render().get_size()[0]
+        
+        
+        return s
