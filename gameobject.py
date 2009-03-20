@@ -43,6 +43,8 @@ class GameObject (object):
             #handle collision
             return True
         
+    def act(self):
+        pass
         
     def collides_with(self, obj):
         """Checks whether or not this object collides with obj.

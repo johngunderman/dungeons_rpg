@@ -3,7 +3,9 @@ import pygame
 from pygame import display
 
 class Screen (object):
-
+    """This Class represents the screen on which movement occurs. It handles
+    collisions and movement."""
+    
     ##TODO: We need to layer the game-objects with an z coord, because otherwise
     ##      we will have our objects colliding with the background, etc.
     ##      Possible fix: gameobject.collides_with(obj) method
@@ -59,4 +61,5 @@ class Screen (object):
             and obj.dimensions[0] + obj.position[0] <= self.dimensions[0]
             and obj.dimensions[1] + obj.position[1] <= self.dimensions[1] 
             )
+            
 
