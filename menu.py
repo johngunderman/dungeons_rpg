@@ -21,7 +21,7 @@ class Menu (object):
         #change None to a font if we want a specific font in the future
         self.font = pygame.font.Font( None, 22)
         #make our menu items
-        for item in self.menu_items:
+        for item in self.menu_items: 
              self.items.append( MenuItem(item, self.menu_items[item], self.font) )
         
         #make our title
@@ -58,7 +58,5 @@ class Menu (object):
         
         for item in self.items:
             s.blit(item.render(), (x,y))
-            x += item.render().get_size()[0]
-        
-        
+            x += item.render().get_size()[0] 
         return s

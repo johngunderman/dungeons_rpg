@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 
-pygame.font.init()
+pygame.font.init() 
 
 
 class MenuItem (object):
@@ -18,3 +18,4 @@ class MenuItem (object):
         
     def render(self):
         return self.surface
+        
