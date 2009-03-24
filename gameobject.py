@@ -31,8 +31,8 @@ class GameObject (object):
         #print "move to " + str(self.rect)
         if not self.check_collisions():
             self.position = position
-            self.screen.add_to_dirty_rects(bak_rect)
             self.screen.dirtied(self)
+            self.screen.add_to_dirty_rects(bak_rect)
         else:
             self.rect = bak_rect
         #print self

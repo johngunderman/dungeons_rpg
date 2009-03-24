@@ -30,12 +30,10 @@ class Screen (object):
     def update(self):
         """Renders all elements and refreshes the display"""
         #clear the screen:
-        self.surface.blit(self.background, (0,0))
+        #self.surface.blit(self.background, (0,0))
         for obj in self.dirty_objs:
             self.surface.blit(obj.surface, obj.position)
             
-        #TODO: Eventually this should be replaced with
-        #      The use of smart rect updating.
         pygame.display.update(self.dirty_rects)
         #clear our rects, we've updated these now.
         self.dirty_objs = []

@@ -1,0 +1,4 @@
+#ignore the following file endings.
+*.pyc
+*.pyo
+*.py~
