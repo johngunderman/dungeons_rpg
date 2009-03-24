@@ -4,7 +4,7 @@ from menu_item import MenuItem
 
 class Menu (object):
 
-    def __init__(self, position, title,  menu_items, screen=None):
+    def __init__(self, position=(0,0), title="", menu_items={}, screen=None):
         self.position = position
         self.title = title
         #menu_items is a dictionary of menu entries paired to functions

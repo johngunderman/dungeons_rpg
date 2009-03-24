@@ -4,6 +4,7 @@ from gameobject import GameObject
 import pygame
 from pygame.locals import *
 from player import Player
+from enemy import Enemy
 from menu import Menu
 
 class Game (object):
@@ -12,17 +13,18 @@ class Game (object):
         """Game encompasses the entirety of all game states/objects/etc.
         Here we make our game screen and init some variables for holding our
         game objects."""
-        self.screen = Screen((800,600))
+        self.screen = Screen()
         self.gameobjects = []
-        self.player = Player( (50,50),(25,25), self.screen )
+        #NOTE: We have to specifically set screen to self.screen otherwise
+        #      it will set dimensions to self.screen, which is BAD
+        self.player = Player( (25,50), screen=self.screen )
     
     def run(self):
         """The main game loop. Handles events"""
-        self.screen.add_object( GameObject( (10,10),(100,100), self.screen ) )
+        self.screen.add_object( Enemy( (0,0), screen=self.screen ) )
         self.screen.add_object( self.player )
         #allow keys to be held down
         pygame.key.set_repeat(5,1) #milis delay, repeat
-        self.game_menu()
         while True:
             self.screen.update()
             for event in pygame.event.get():
@@ -48,10 +50,5 @@ class Game (object):
         """Quit the game."""
         exit()
 
-    def game_menu(self):
-        main_menu = Menu((200,200),"Main Menu", {"Quit": quit}, self.screen) 
-        self.screen.surface.blit(main_menu.render(), main_menu.position )
 
-        while True:
-            pygame.display.flip()
 

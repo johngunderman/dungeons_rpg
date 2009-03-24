@@ -10,7 +10,7 @@ class Screen (object):
     ##      we will have our objects colliding with the background, etc.
     ##      Possible fix: gameobject.collides_with(obj) method
 
-    def __init__(self, dimensions):
+    def __init__(self, dimensions=(800,600)):
         """Takes a coordinate pair (x,y) as dimensions, and constructs
         a screen on which all objects are displayed."""
         self.dimensions = dimensions
@@ -19,6 +19,7 @@ class Screen (object):
         self.surface = display.set_mode(dimensions)
         self.background = self.surface.copy()
         self.gameobjects = []
+        self.rect = pygame.Rect((0,0), self.dimensions)
         
     def update(self):
         """Renders all elements and refreshes the display"""
@@ -42,9 +43,10 @@ class Screen (object):
 
     def check_collisions(self, gameobject):
         """Checks collisions on this screen.
-        returns gameobject collided with. None if no collision."""
+        returns obj that gameobject has collided with. None if no collision."""
         for obj in self.gameobjects:
             if obj is not gameobject:
+                #have obj to the checking because obj may be non-collidable 
                 if obj.collides_with(gameobject):
                     return obj
         return None
@@ -52,14 +54,10 @@ class Screen (object):
             
     def in_bounds(self, obj):
         """Checks if the given gameobject is in bounds."""
-        print "Checking if "+ str(obj) +" is in bounds..."
-        #first check in-bounds from upper-left
-        return (obj.position[0] >= 0 
-            and obj.position[1] >= 0 
-            #now check from bottom-right
-            #make sure that the body does not extend out of bounds either.
-            and obj.dimensions[0] + obj.position[0] <= self.dimensions[0]
-            and obj.dimensions[1] + obj.position[1] <= self.dimensions[1] 
-            )
-            
+        print "Checking if "+ str(obj) +" is in bounds... ",
+        a =  bool( self.rect.contains(obj.rect) )
+        print a
+        #print self.rect
+        #print obj.rect
+        return a
 
