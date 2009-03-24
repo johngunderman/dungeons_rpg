@@ -6,6 +6,7 @@ from pygame.locals import *
 from player import Player
 from enemy import Enemy
 from menu import Menu
+from text import Text
 
 class Game (object):
 
@@ -22,29 +23,12 @@ class Game (object):
     def run(self):
         """The main game loop. Handles events"""
         self.screen.add_object( Enemy( (0,0), screen=self.screen ) )
-        self.screen.add_object( self.player )
-        #allow keys to be held down
-        pygame.key.set_repeat(5,1) #milis delay, repeat
-        while True:
-            self.screen.update()
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    self.screen.kill()
-                    #TODO: eventually have a prompt for saving, etc.
-                    self.quit()
-                if event.type == KEYDOWN:
-                    if event.key == K_UP:
-                        print "UP"
-                        self.player.move_up()
-                    if event.key == K_DOWN:
-                        print "DOWN"
-                        self.player.move_down()
-                    if event.key == K_LEFT:
-                        print "LEFT"
-                        self.player.move_left()
-                    if event.key == K_RIGHT:
-                        print "RIGHT"
-                        self.player.move_right()
+        self.screen.add_object( Text( (500,0), "Test", screen=self.screen) )
+        self.screen.add_player( self.player )
+        self.screen.run()
+        #TODO: eventually have a prompt for saving, etc.
+        self.quit()
+
     
     def quit(self):
         """Quit the game."""

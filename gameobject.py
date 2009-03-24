@@ -19,6 +19,7 @@ class GameObject (object):
         self.rect = pygame.Rect(self.position, self.dimensions)
         #self.rect = pygame.Rect(10,10,10,10)
         self.name = "Obj"
+        #TODO: make "self.previous_location" an attribute
 
     def __str__(self):
         return "<GameObject: dimensions="+str(self.dimensions)+", position="+str(self.position)+">"
@@ -30,6 +31,8 @@ class GameObject (object):
         #print "move to " + str(self.rect)
         if not self.check_collisions():
             self.position = position
+            self.screen.add_to_dirty_rects(bak_rect)
+            self.screen.dirtied(self)
         else:
             self.rect = bak_rect
         #print self
