@@ -31,9 +31,12 @@ class Screen (object):
         """Renders all elements and refreshes the display"""
         #clear the screen:
         #self.surface.blit(self.background, (0,0))
+        #erase where we've been to avoid streaky trails.
+        for rect in self.dirty_rects:
+            subsurface = self.background.subsurface(rect).copy()
+            self.surface.blit(subsurface, (rect.left, rect.top) )
         for obj in self.dirty_objs:
-            self.surface.blit(obj.surface, obj.position)
-            
+            self.surface.blit(obj.surface, obj.position)   
         pygame.display.update(self.dirty_rects)
         #clear our rects, we've updated these now.
         self.dirty_objs = []

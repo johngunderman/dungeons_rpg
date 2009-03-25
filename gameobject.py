@@ -32,6 +32,7 @@ class GameObject (object):
         if not self.check_collisions():
             self.position = position
             self.screen.dirtied(self)
+            #where we've been
             self.screen.add_to_dirty_rects(bak_rect)
         else:
             self.rect = bak_rect
