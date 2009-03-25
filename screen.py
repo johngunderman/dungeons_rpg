@@ -68,16 +68,12 @@ class Screen (object):
                     return
                 if event.type == KEYDOWN:
                     if event.key == K_UP:
-                        print "UP"
                         self.player.move_up()
                     if event.key == K_DOWN:
-                        print "DOWN"
                         self.player.move_down()
                     if event.key == K_LEFT:
-                        print "LEFT"
                         self.player.move_left()
                     if event.key == K_RIGHT:
-                        print "RIGHT"
                         self.player.move_right()
                         
                         
@@ -96,7 +92,7 @@ class Screen (object):
             #TODO: remove the surface from the display
     
     
-    def add_player(self, player=Player(position=(0,0), screen=None) ):
+    def add_player(self, player):
         """Adds a player character to the screen. also adds the player to
         gameobjects. It will check to make sure that the player is not already
         added."""

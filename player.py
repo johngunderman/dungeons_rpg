@@ -10,12 +10,14 @@ class Player (Actor):
         super(Player, self).__init__(position, dimensions, screen)
         self.name = "Player"
         self.surface, self.rect = helper.load_image("avt1_fr2.gif", -1)
+        self.dimensions = self.surface.get_size()
+        self.rect = pygame.Rect(self.position, self.dimensions)
         
     def move(self, position):
         """Overrides actor so that we get random encounter generation."""
         #TODO: We need to limit random encounters to only certain areas on map.
         super(Player, self).move(position)
-        event = random.randint(0,20)
+        event = random.randint(0,200)
         if event == 0:
             self.random_encounter()
             
