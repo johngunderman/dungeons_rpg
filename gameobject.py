@@ -17,6 +17,7 @@ class GameObject (object):
         self.color = pygame.Color("red")
         self.surface.fill(self.color)
         self.rect = pygame.Rect(self.position, self.dimensions)
+        self.image = None
         #self.rect = pygame.Rect(10,10,10,10)
         self.name = "Obj"
         #TODO: make "self.previous_location" an attribute
@@ -36,8 +37,10 @@ class GameObject (object):
             self.screen.add_to_dirty_rects(bak_rect)
         else:
             self.rect = bak_rect
-        #print self
-           
+        #print self 
+        
+    def render(self):
+        return self.surface
         
     def check_collisions(self):
         """Check collisions between this object and all other objects in

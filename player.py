@@ -2,12 +2,14 @@
 from actor import Actor
 import random
 import pygame
+import helper
 
 class Player (Actor):
 
     def __init__(self, position, dimensions=(50,50), screen=None):
         super(Player, self).__init__(position, dimensions, screen)
         self.name = "Player"
+        self.surface, self.rect = helper.load_image("avt1_fr2.gif", -1)
         
     def move(self, position):
         """Overrides actor so that we get random encounter generation."""
@@ -19,3 +21,4 @@ class Player (Actor):
             
     def random_encounter(self):
         print "RANDOM ENCOUNTER!!!"
+        

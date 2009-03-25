@@ -14,4 +14,5 @@ class Text (GameObject):
         
     def collides_with(self, gameobject):
         """No collisions for text."""
+        self.screen.dirtied(self)
         return False

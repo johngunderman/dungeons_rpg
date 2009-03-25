@@ -16,9 +16,11 @@ class Screen (object):
         """Takes a coordinate pair (x,y) as dimensions, and constructs
         a screen on which all objects are displayed."""
         self.dimensions = dimensions
+        pygame.init()
         display.init()
         display.set_caption("Dungeon-RPG")
         self.surface = display.set_mode(dimensions)
+        self.surface.fill((0,255,0))
         self.background = self.surface.copy()
         self.gameobjects = []
         self.rect = pygame.Rect((0,0), self.dimensions)
@@ -26,6 +28,8 @@ class Screen (object):
         #we only will update the dirty_objs to boost our speeds
         self.dirty_objs = []
         self.dirty_rects = []
+        #refresh the background the first time through:
+        self.add_to_dirty_rects(self.rect)
         
     def update(self):
         """Renders all elements and refreshes the display"""
@@ -36,7 +40,7 @@ class Screen (object):
             subsurface = self.background.subsurface(rect).copy()
             self.surface.blit(subsurface, (rect.left, rect.top) )
         for obj in self.dirty_objs:
-            self.surface.blit(obj.surface, obj.position)   
+            self.surface.blit(obj.render(), obj.position)   
         pygame.display.update(self.dirty_rects)
         #clear our rects, we've updated these now.
         self.dirty_objs = []
@@ -49,6 +53,8 @@ class Screen (object):
         self.dirty_rects.append(obj)
         
     def dirtied(self, obj):
+        """Takes a gameobject and appends it to dirty_objs and dirty_rects
+        to make sure we update it on the screen."""
         self.dirty_objs.append(obj)
         self.dirty_rects.append(obj.rect)
     
