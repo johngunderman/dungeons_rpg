@@ -75,7 +75,11 @@ class Screen (object):
                         self.player.move_left()
                     if event.key == K_RIGHT:
                         self.player.move_right()
-                        
+                  
+                  
+    def battle(self, enemy, player):
+        """Starts a battle between the enemy and the player"""
+        print "Initiate battle!"
                         
         
     def add_object(self, gameobject):

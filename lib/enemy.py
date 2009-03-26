@@ -17,3 +17,8 @@ class EvilMage (Enemy):
         self.load_image("amg1_fr1.gif", -1)
         self.screen.dirtied(self)
         
+    def collides_with(self, obj):
+        collides = super(EvilMage, self).collides_with(obj)
+        if collides:
+            self.screen.battle(self, obj)
+        return collides
