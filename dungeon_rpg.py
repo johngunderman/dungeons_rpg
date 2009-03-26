@@ -5,7 +5,7 @@
 # By: John Gunderman #
 ######################
 
-from game import Game
+from lib.game import Game
 
 game = Game()
 

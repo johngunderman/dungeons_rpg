@@ -1,13 +1,14 @@
 
 import pygame
 from pygame import Surface
+import os
+from pygame.locals import *
 
 class GameObject (object):
     """This class is the base class for anything that wants to find itself
     on the screen."""
     
     def __init__(self, position, dimensions=(100,100), screen=None):
-        #print position, dimensions
         #TODO: eventually get sprites working
         self.dimensions = dimensions #(x,y)
         self.screen = screen
@@ -18,12 +19,31 @@ class GameObject (object):
         self.surface.fill(self.color)
         self.rect = pygame.Rect(self.position, self.dimensions)
         self.image = None
-        #self.rect = pygame.Rect(10,10,10,10)
         self.name = "Obj"
         #TODO: make "self.previous_location" an attribute
 
     def __str__(self):
         return "<GameObject: dimensions="+str(self.dimensions)+", position="+str(self.position)+">"
+
+    def load_image(self, name, colorkey=None):
+        fullname = os.path.join('sprites', name)
+        try:
+            image = pygame.image.load(fullname)
+        except pygame.error, message:
+            print 'Cannot load image:', name
+            raise SystemExit, message
+        if image.get_alpha() is None:
+            image = image.convert()
+        else:
+            image = image.convert_alpha()
+        if colorkey is not None:
+            if colorkey is -1:
+                colorkey = image.get_at((0,0))
+            image.set_colorkey(colorkey, RLEACCEL)
+        self.surface = image
+        self.dimensions = image.get_size()
+        self.rect = pygame.Rect(self.position,self.dimensions)
+        
 
     def move(self, position):
         """Takes a position in (x,y) form and updates this object's position"""
@@ -51,7 +71,6 @@ class GameObject (object):
             return True
             
         obj = self.screen.check_collisions(self)
-        #print obj
         if obj is None: #no collision
             return False
         else:

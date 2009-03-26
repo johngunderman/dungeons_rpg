@@ -4,7 +4,7 @@ from gameobject import GameObject
 import pygame
 from pygame.locals import *
 from player import Player
-from enemy import Enemy
+from enemy import *
 from menu import Menu
 from text import Text
 
@@ -22,7 +22,7 @@ class Game (object):
     
     def run(self):
         """The main game loop. Handles events"""
-        self.screen.add_object( Enemy( (0,0), screen=self.screen ) )
+        self.screen.add_object( EvilMage( (100,100), screen=self.screen ) )
         self.screen.add_object( Text( (500,0), "Test", screen=self.screen) )
         self.screen.add_player( self.player )
         self.screen.run()
