@@ -1,0 +1,30 @@
+TODO for dungons_rpg
+
+
+Mandatory:
+==========
+
+[ ] Add modes, eg. Battle, World-Map, Indoors
+[ ] Fix menu system
+[ ] Add/find more sprites
+[ ] Implement clock/FPS system
+[ ] Design levels
+[ ] Create format for saving levels
+[ ] Write an actual story-line :)
+[ ] Make some monsters
+[ ] Make the battle system
+[ ] 
+
+Bugs:
+=====
+
+
+Features:
+=========
+
+[ ] have gameobjects inherit from sprites?
+
+
+
+Completed:
+==========
