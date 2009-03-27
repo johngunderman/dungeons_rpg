@@ -3,6 +3,7 @@ import pygame
 from pygame import display
 from player import Player
 from pygame.locals import *
+from main_menu import MainMenu
 
 class Screen (object):
     """This Class represents the screen on which movement occurs. It handles
@@ -12,7 +13,7 @@ class Screen (object):
     ##      we will have our objects colliding with the background, etc.
     ##      Possible fix: gameobject.collides_with(obj) method
 
-    def __init__(self, dimensions=(800,600), player=None):
+    def __init__(self, dimensions=(640,480), player=None):
         """Takes a coordinate pair (x,y) as dimensions, and constructs
         a screen on which all objects are displayed."""
         self.dimensions = dimensions
@@ -59,6 +60,7 @@ class Screen (object):
         self.dirty_rects.append(obj.rect)
     
     def run(self):
+        """Our main loop while the screen is running."""
         #allow keys to be held down
         pygame.key.set_repeat(1,0) #milis delay, repeat
         while True:
@@ -76,10 +78,6 @@ class Screen (object):
                     if event.key == K_RIGHT:
                         self.player.move_right()
                   
-                  
-    def battle(self, enemy, player):
-        """Starts a battle between the enemy and the player"""
-        print "Initiate battle!"
                         
         
     def add_object(self, gameobject):
@@ -131,3 +129,41 @@ class Screen (object):
         #print obj.rect
         return a
 
+    def main_menu(self):
+        menu = MainMenu(self)
+        menu.run()
+
+
+    ## ==============================================
+    ## The following functions deal with battle mode.
+    ## ==============================================
+    
+    def battle(self, enemy):
+        """Starts a battle between the enemy and the player"""
+        print "Initiate battle!"
+        #TODO: make attribute for battle-screen which is background for battle scene
+        bak_background = self.background.copy()
+        bak_gobs = self.gameobjects
+        self.dirty_objs = []
+        self.dirty_rects = []
+        
+        ## do stuff here
+        ## ==============
+        
+        #make ourselves a new background
+        self.background.fill( (255,0,0) )
+        self.add_to_dirty_rects(self.rect)
+        
+        
+        
+        
+        
+        ## restore our regular settings.
+        ## =============================
+        
+        self.background = bak_background    
+        self.gameobjects = bak_gobs
+        self.dirty_objs = []
+        self.dirty_rects = []
+        
+    

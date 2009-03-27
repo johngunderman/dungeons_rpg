@@ -33,14 +33,18 @@ class Menu (object):
         
         #figure out our total width and height:
         self.height = 0
-        self.width = 0
+        self.width = self.title_dimensions[0]
         for item in self.items:
-            self.height += item.dimensions[0]
-            if self.height < item.dimensions[1]:
-                self.height = item.dimensions[1]
+            self.height += item.dimensions[1]
+            if self.width < item.dimensions[0]:
+                self.width = item.dimensions[0]
                 
         #make sure to add in our separator:
         self.height += len(self.items) * self.separator
+        
+        self.width = 300
+        self.height = 300
+        
         
         
         
@@ -48,15 +52,32 @@ class Menu (object):
         #our vertical pixel location
         x = 0
         #horizontal displacement
-        y = 5
+        y = 0
         
         s = pygame.Surface( (self.width, self.height) )
-        s.fill( 255 )
+        s.fill( (0,0,255) )
         
         s.blit(self.title_surface, (x,y))
-        x += self.title_surface.get_size()[0]
+        y += self.title_surface.get_size()[0]
+        
+        print self.items
         
         for item in self.items:
             s.blit(item.render(), (x,y))
-            x += item.render().get_size()[0] 
+            y += item.render().get_size()[0] 
         return s
+        
+        
+    def run(self):
+        bak_surface = self.screen.surface.copy()
+        
+        while True:
+            menu = self.render()
+            rect = pygame.Rect(self.position, (self.width, self.height))
+            self.screen.surface.blit(menu, self.position)
+            pygame.display.update(rect)
+            a = raw_input()
+            if a == "":
+                break
+        
+        self.screen.surface = bak_surface

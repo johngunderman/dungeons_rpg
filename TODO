@@ -4,7 +4,8 @@ TODO for dungons_rpg
 Mandatory:
 ==========
 
-[ ] Add modes, eg. Battle, World-Map, Indoors
+[ ] Add battle mode to screen
+[ ] Add ability to move to other maps
 [ ] Fix menu system
 [ ] Add/find more sprites
 [ ] Implement clock/FPS system

@@ -22,4 +22,5 @@ class Player (Actor):
             
     def random_encounter(self):
         print "RANDOM ENCOUNTER!!!"
+        self.screen.main_menu()
         
