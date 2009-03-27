@@ -42,8 +42,6 @@ class Menu (object):
         #make sure to add in our separator:
         self.height += len(self.items) * self.separator
         
-        self.width = 300
-        self.height = 300
         
         
         
@@ -58,13 +56,16 @@ class Menu (object):
         s.fill( (0,0,255) )
         
         s.blit(self.title_surface, (x,y))
-        y += self.title_surface.get_size()[0]
+        y += self.title_surface.get_size()[1]
+        
+        print self.title_surface.get_size()
+        print x, y
         
         print self.items
         
         for item in self.items:
             s.blit(item.render(), (x,y))
-            y += item.render().get_size()[0] 
+            y += item.dimensions[1] 
         return s
         
         
