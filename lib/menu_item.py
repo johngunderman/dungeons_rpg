@@ -16,7 +16,7 @@ class MenuItem (object):
     def __repr__(self):
         return "<MenuItem(title="+str(self.title)+", function="+str(self.function)+")>"
         
-    def execute():
+    def execute(self):
         self.function()
         
     def render(self):

@@ -77,6 +77,8 @@ class Screen (object):
                         self.player.move_left()
                     if event.key == K_RIGHT:
                         self.player.move_right()
+                    if event.key == K_SPACE:
+                        self.main_menu()
                   
                         
         
