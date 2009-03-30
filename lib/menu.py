@@ -110,6 +110,7 @@ class Menu (object):
                     if event.key == K_ESCAPE:
                         #restore the state of our game surface
                         self.screen.surface = bak_surface
+                        self.screen.refresh_screen()
                         return
         
         

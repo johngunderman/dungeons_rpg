@@ -110,6 +110,17 @@ class Screen (object):
     def kill(self):
         """Close the screen."""
         display.quit()
+        
+        
+    def refresh_screen(self):
+        """This method effectively regains a reference to our display,
+        in case we have lost it, and then blits self.surface onto it and
+        calls pygame.display.flip()"""
+        s = pygame.display.get_surface()
+        s.blit(self.surface,(0,0))
+        self.surface = s
+        pygame.display.flip()
+        
 
     def check_collisions(self, gameobject):
         """Checks collisions on this screen.

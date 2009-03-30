@@ -18,6 +18,7 @@ class MenuItem (object):
         
     def execute(self):
         self.function()
+
         
     def render(self):
         return self.surface
