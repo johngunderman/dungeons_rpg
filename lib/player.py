@@ -3,6 +3,7 @@ from actor import Actor
 import random
 import pygame
 import helper
+from pygame.locals import *
 
 class Player (Actor):
 
@@ -19,6 +20,23 @@ class Player (Actor):
         event = random.randint(0,200)
         if event == 0:
             self.random_encounter()
+    
+    def act(self):
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                return
+            if event.type == KEYDOWN:
+                if event.key == K_UP:
+                    self.move_up()
+                if event.key == K_DOWN:
+                    self.move_down()
+                if event.key == K_LEFT:
+                    self.move_left()
+                if event.key == K_RIGHT:
+                    self.move_right()
+                if event.key == K_SPACE:
+                    self.screen.main_menu()
+                    
             
     def random_encounter(self):
         print "RANDOM ENCOUNTER!!!"

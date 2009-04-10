@@ -21,6 +21,6 @@ class EvilMage (Enemy):
         collides = super(EvilMage, self).collides_with(obj)
         if collides:
             #TODO
-            #self.screen.battle(self, obj)
+            self.screen.battle(self)
             pass
         return collides

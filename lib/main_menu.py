@@ -6,8 +6,8 @@ class MainMenu (Menu):
         super(MainMenu, self).__init__(position=(20,20),
                                        title="Main Menu",
                                        menu_items={"Quit": self.quit,
-                                             "Cancel": self.cancel
-                                             },
+                                                   "Cancel": self.cancel
+                                                  },
                                        screen=screen
                                        )
                                        

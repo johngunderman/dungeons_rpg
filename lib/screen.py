@@ -4,6 +4,7 @@ from pygame import display
 from player import Player
 from pygame.locals import *
 from main_menu import MainMenu
+from battlescreen import BattleScreen
 
 class Screen (object):
     """This Class represents the screen on which movement occurs. It handles
@@ -65,20 +66,8 @@ class Screen (object):
         pygame.key.set_repeat(1,0) #milis delay, repeat
         while True:
             self.update()
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    return
-                if event.type == KEYDOWN:
-                    if event.key == K_UP:
-                        self.player.move_up()
-                    if event.key == K_DOWN:
-                        self.player.move_down()
-                    if event.key == K_LEFT:
-                        self.player.move_left()
-                    if event.key == K_RIGHT:
-                        self.player.move_right()
-                    if event.key == K_SPACE:
-                        self.main_menu()
+            for obj in self.gameobjects:
+                obj.act()
                   
                         
         
@@ -141,42 +130,16 @@ class Screen (object):
         #print self.rect
         #print obj.rect
         return a
+        
 
     def main_menu(self):
         menu = MainMenu(self)
         menu.run()
 
-
-    ## ==============================================
-    ## The following functions deal with battle mode.
-    ## ==============================================
     
     def battle(self, enemy):
         """Starts a battle between the enemy and the player"""
         print "Initiate battle!"
-        #TODO: make attribute for battle-screen which is background for battle scene
-        bak_background = self.background.copy()
-        bak_gobs = self.gameobjects
-        self.dirty_objs = []
-        self.dirty_rects = []
-        
-        ## do stuff here
-        ## ==============
-        
-        #make ourselves a new background
-        self.background.fill( (255,0,0) )
-        self.add_to_dirty_rects(self.rect)
-        
-        
-        
-        
-        
-        ## restore our regular settings.
-        ## =============================
-        
-        self.background = bak_background    
-        self.gameobjects = bak_gobs
-        self.dirty_objs = []
-        self.dirty_rects = []
-        
+        b = BattleScreen(self.player, enemy, self)
+        b.run()
     
